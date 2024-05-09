@@ -7,6 +7,12 @@
 /dataSources/
 /dataSources.local.xml
 
+# docker env files
+/docker/env
+
+# resources env files
+/src/main/resources/env
+
 # Created by https://www.toptal.com/developers/gitignore/api/gradle,intellij+all,macos,windows,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=gradle,intellij+all,macos,windows,java
 
