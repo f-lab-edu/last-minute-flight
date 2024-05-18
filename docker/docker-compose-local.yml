@@ -1,0 +1,14 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_local
+    platform: linux/x86_64
+    restart: always
+    ports:
+      - "3306:3306"
+    env_file:
+      - env/env-local.env
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
