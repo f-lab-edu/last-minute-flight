@@ -23,7 +23,6 @@ public class TestService {
 	private final TestMapper testMapper;
 
 	public TestCreateResponse createTest(TestCreateRequest createRequest){
-		System.out.println(createRequest.name());
 		TestCreateRequestDto requestDto = testMapper.requestToDto(createRequest);
 		TestCreateResponseDto responseDto = testDomainService.createTestEntity(requestDto);
 
