@@ -1,9 +1,0 @@
-spring:
-  profiles:
-    active:
-      - local
-    group:
-      local:
-        - db-local
-    include:
-      - db

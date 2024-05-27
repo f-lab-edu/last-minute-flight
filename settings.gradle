@@ -1,1 +1,3 @@
 rootProject.name = 'lastminuteflight'
+
+include ('flight-api', 'flight-application', 'flight-core')
