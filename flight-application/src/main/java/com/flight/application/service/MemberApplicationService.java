@@ -2,8 +2,11 @@ package com.flight.application.service;
 
 import org.springframework.stereotype.Service;
 
-import com.flight.common.dto.SignupRequest;
-import com.flight.common.dto.SignupResponse;
+import com.flight.application.dto.SignupServiceRequest;
+import com.flight.application.dto.SignupServiceResponse;
+import com.flight.application.mapper.MemberApplicationMapper;
+import com.flight.core.dto.SignupDomainRequest;
+import com.flight.core.dto.SignupDomainResponse;
 import com.flight.core.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -13,9 +16,14 @@ import lombok.RequiredArgsConstructor;
 public class MemberApplicationService {
 
 	private final MemberService memberService;
+	private final MemberApplicationMapper mapper;
 
-	public SignupResponse signUp(SignupRequest request) {
+	public SignupServiceResponse signUp(SignupServiceRequest serviceRequest) {
 
-		return memberService.createAndSaveMember(request);
+		SignupDomainRequest domainRequest = mapper.serviceRequestToDomainRequest(serviceRequest);
+
+		SignupDomainResponse domainResponse = memberService.createAndSaveMember(domainRequest);
+
+		return mapper.domainResponseToServiceResponse(domainResponse);
 	}
 }
