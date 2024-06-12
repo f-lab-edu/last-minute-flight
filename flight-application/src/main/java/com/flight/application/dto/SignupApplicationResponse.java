@@ -1,9 +1,8 @@
 package com.flight.application.dto;
 
-public record SignupServiceRequest(
+public record SignupApplicationResponse(
 	String name,
 	String loginId,
-	String password,
 	String email
 ) {
 }
