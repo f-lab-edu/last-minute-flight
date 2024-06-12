@@ -1,8 +1,11 @@
 package com.flight.core.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.flight.common.exception.DuplicatedFieldException;
+import com.flight.core.dto.MemberDomainResponse;
 import com.flight.core.dto.SignupDomainRequest;
 import com.flight.core.dto.SignupDomainResponse;
 import com.flight.core.entity.Member;
@@ -28,8 +31,18 @@ public class MemberService {
 			Member member = mapper.domainRequestToEntity(request);
 			memberRepository.save(member);
 
-			return mapper.entityToDomainResponse(member);
+			return mapper.entityToSignupDomainResponse(member);
 		}
+	}
+
+	public Optional<MemberDomainResponse> getMemberByLoginId(String loginId) {
+
+		Optional<MemberDomainResponse> domainResponse;
+
+		Optional<Member> optionalMember = memberRepository.findByLoginId(loginId);
+		domainResponse = optionalMember.map(mapper::entityToDomainResponse);
+
+		return domainResponse;
 	}
 
 	private boolean loginIdExists(String loginId) {
