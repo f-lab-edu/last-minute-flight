@@ -35,12 +35,8 @@ public class MemberService {
 
 	public Optional<MemberDomainResponse> getMemberByLoginId(String loginId) {
 
-		Optional<MemberDomainResponse> domainResponse;
-
 		Optional<Member> optionalMember = memberRepository.findByLoginId(loginId);
-		domainResponse = optionalMember.map(mapper::entityToDomainResponse);
-
-		return domainResponse;
+		return optionalMember.map(mapper::entityToDomainResponse);
 	}
 
 	private void throwExceptionIfLoginIdExists(String loginId) {
