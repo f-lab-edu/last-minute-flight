@@ -23,16 +23,14 @@ public class MemberService {
 
 	public SignupDomainResponse createAndSaveMember(SignupDomainRequest request) {
 
-		if (loginIdExists(request.loginId())) {
-			throw new DuplicatedFieldException("loginId");
-		} else if (emailExists(request.email())) {
-			throw new DuplicatedFieldException("email");
-		} else {
-			Member member = mapper.domainRequestToEntity(request);
-			memberRepository.save(member);
+		throwExceptionIfEmailExists(request.email());
+		throwExceptionIfLoginIdExists(request.loginId());
 
-			return mapper.entityToSignupDomainResponse(member);
-		}
+		Member member = mapper.domainRequestToEntity(request);
+		memberRepository.save(member);
+
+		return mapper.entityToSignupDomainResponse(member);
+
 	}
 
 	public Optional<MemberDomainResponse> getMemberByLoginId(String loginId) {
@@ -45,11 +43,17 @@ public class MemberService {
 		return domainResponse;
 	}
 
-	private boolean loginIdExists(String loginId) {
-		return memberRepository.existsByLoginId(loginId);
+	private void throwExceptionIfLoginIdExists(String loginId) {
+
+		if (memberRepository.existsByLoginId(loginId)) {
+			throw new DuplicatedFieldException("loginId");
+		}
 	}
 
-	private boolean emailExists(String email) {
-		return memberRepository.existsByEmail(email);
+	private void throwExceptionIfEmailExists(String email) {
+
+		if (memberRepository.existsByEmail(email)) {
+			throw new DuplicatedFieldException("email");
+		}
 	}
 }
