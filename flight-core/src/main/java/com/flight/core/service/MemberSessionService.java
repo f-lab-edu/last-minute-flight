@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.flight.common.dto.MemberSessionInfo;
 import com.flight.core.entity.MemberSession;
 import com.flight.core.mapper.MemberSessionDomainMapper;
-import com.flight.core.repository.MemberSessionRepository;
+import com.flight.core.repository.MemberSessionCache;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,24 +15,24 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberSessionService {
 
-	private final MemberSessionRepository memberSessionRepository;
+	private final MemberSessionCache memberSessionCache;
 	private final MemberSessionDomainMapper mapper;
 
 	public void createAndSaveSession(MemberSessionInfo sessionInfo) {
 
 		MemberSession memberSession = mapper.dtoToEntity(sessionInfo);
 
-		memberSessionRepository.saveSession(memberSession);
+		memberSessionCache.saveSession(memberSession);
 	}
 
 	public Optional<MemberSessionInfo> getSession(String sessionId) {
 
-		Optional<MemberSession> optionalMemberSession = memberSessionRepository.findSession(sessionId);
+		Optional<MemberSession> optionalMemberSession = memberSessionCache.findSession(sessionId);
 
 		return optionalMemberSession.map(mapper::entityToDto);
 	}
 
 	public void deleteSession(String sessionId) {
-		memberSessionRepository.deleteSession(sessionId);
+		memberSessionCache.deleteSession(sessionId);
 	}
 }

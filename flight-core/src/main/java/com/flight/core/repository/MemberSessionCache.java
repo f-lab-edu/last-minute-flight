@@ -4,15 +4,15 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import com.flight.core.entity.MemberSession;
 
 import lombok.RequiredArgsConstructor;
 
-@Repository
+@Component
 @RequiredArgsConstructor
-public class MemberSessionRepository {
+public class MemberSessionCache {
 
 	private static final String SESSION_PREFIX = "session_";
 	private static final long TIME_OUT_MINUTE = 60;
