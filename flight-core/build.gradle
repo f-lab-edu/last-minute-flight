@@ -4,6 +4,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     runtimeOnly 'com.mysql:mysql-connector-j'
 
+    // querydsl
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 
     implementation 'org.mindrot:jbcrypt:0.4'
@@ -11,10 +17,34 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 }
 
-tasks.bootJar{
+tasks.bootJar {
     enabled = false
 }
 
-tasks.jar{
+tasks.jar {
     enabled = true
+}
+
+// 빌드 옵션
+def querydslDir = "$buildDir/generated/querydsl"
+
+// gradle build 시 QClass 소스도 함께 Build 하기 위해
+sourceSets {
+    main.java.srcDirs += [ querydslDir ]
+}
+
+// 기존에는 Qclass 내 Generated 를 java 9에 있는 javax.annotation.processing.Generated 로 import
+// 다른 버전의 java 에서도 사용할 수 있도록 java.annotation.Generated 로 설정
+compileJava{
+    options.compilerArgs << '-Aquerydsl.generatedAnnotationClass=javax.annotation.Generated'
+}
+
+// annotation processor 가 만든 QClass 를 querydslDir 에 저장
+tasks.withType(JavaCompile).configureEach {
+    options.generatedSourceOutputDirectory = file(querydslDir)
+}
+
+// clean 실행시 QClass 삭제
+clean {
+    delete file(querydslDir)
 }
