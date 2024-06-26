@@ -1,0 +1,17 @@
+spring:
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID
+
+---
+spring:
+  config:
+    activate:
+      on-profile: web-local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: web-prod

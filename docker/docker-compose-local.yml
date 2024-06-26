@@ -12,3 +12,10 @@ services:
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+  redis:
+    image: redis:alpine
+    container_name: redis_local
+    restart: always
+    ports:
+      - 6379:6379
+

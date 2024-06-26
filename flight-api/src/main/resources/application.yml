@@ -5,7 +5,10 @@ spring:
     group:
       local:
         - db-local
+        - web-local
       prod:
         - db-prod
+        - web-prod
     include:
       - db
+      - web
