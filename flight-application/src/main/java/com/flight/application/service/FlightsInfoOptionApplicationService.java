@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.flight.application.dto.FlightsInfoOptionApplicationResponse;
 import com.flight.application.mapper.FlightsInfoOptionApplicationMapper;
-import com.flight.core.dto.FlightsInfoOptionDomainResponse;
 import com.flight.core.service.FlightsInfoOptionService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,10 +21,9 @@ public class FlightsInfoOptionApplicationService {
 	public List<FlightsInfoOptionApplicationResponse> searchFlightsInfoOptions(String departures, String arrivals,
 		LocalDate departureDate) {
 
-		List<FlightsInfoOptionDomainResponse> domainResponses = flightsInfoOptionService.search(departures, arrivals,
-			departureDate);
-
-		return mapper.domainResponseToApplicationResponse(domainResponses);
+		return mapper.domainResponseToApplicationResponse(
+			flightsInfoOptionService.search(departures, arrivals, departureDate)
+		);
 	}
 
 }
