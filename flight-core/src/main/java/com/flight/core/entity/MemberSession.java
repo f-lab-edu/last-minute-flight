@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 public record MemberSession(
 	String sessionId,
+	Long memberId,
 	String name,
 	String loginId,
 	String email

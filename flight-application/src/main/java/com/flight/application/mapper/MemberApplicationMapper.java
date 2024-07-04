@@ -20,6 +20,7 @@ public interface MemberApplicationMapper {
 	@Mapping(source = "domainResponse.name", target = "name")
 	@Mapping(source = "domainResponse.loginId", target = "loginId")
 	@Mapping(source = "domainResponse.email", target = "email")
+	@Mapping(source = "domainResponse.memberId", target = "memberId")
 	@Mapping(source = "sessionId", target = "sessionId")
 	MemberSessionInfo domainResponseToDto(MemberDomainResponse domainResponse, String sessionId);
 }
