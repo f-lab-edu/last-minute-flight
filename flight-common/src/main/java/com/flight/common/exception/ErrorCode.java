@@ -8,9 +8,15 @@ public enum ErrorCode {
 	// client
 	DUPLICATED_FIELD("C000", 400),
 	INVALID_INPUT_PATTERN("C001", 400),
-	RESOURCE_NOT_FOUND("C002", 400),
+	RESOURCE_NOT_FOUND("C002", 404),
 	PASSWORD_NOT_MATCH("C003", 401),
-	UNAUTHENTICATED("C004", 401);
+	UNAUTHENTICATED("C004", 401),
+	INSUFFICIENT_SEATS("C005", 409),
+
+	// server
+	LOCK_ACQUISITION_FAILED("S001", 500),
+	INTERNAL_BOOKING_FAILED("S002", 503);
+
 
 	private final String code;
 	private final int httpStatusCode;
@@ -34,6 +40,9 @@ public enum ErrorCode {
 		public static final String RESOURCE_NOT_FOUND = "%s not found";
 		public static final String PASSWORD_NOT_MATCH = "Password not match";
 		public static final String UNAUTHENTICATED = "Member is not authenticated";
+		public static final String INTERNAL_SERVER_ERROR = "Internal server error has occurred";
+		public static final String INSUFFICIENT_SEATS = "Not enough seats available";
+		public static final String INTERNAL_BOOKING_FAILED = "Booking failed due to an internal error";
 	}
 
 	public abstract static class InternalMessage {
@@ -45,6 +54,7 @@ public enum ErrorCode {
 		public static final String RESOURCE_NOT_FOUND = "Resource not found : [%s]";
 		public static final String PASSWORD_NOT_MATCH = "Password not match";
 		public static final String UNAUTHENTICATED = "Member is not authenticated";
-
+		public static final String LOCK_ACQUISITION_FAILED= "Lock acquisition fail : [lock key : %s]";
+		public static final String INSUFFICIENT_SEATS = "Not enough seats available : [flightsInfoOptionId : %s]";
 	}
 }
