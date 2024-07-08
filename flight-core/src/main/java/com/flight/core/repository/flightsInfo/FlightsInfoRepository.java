@@ -1,4 +1,4 @@
-package com.flight.core.repository;
+package com.flight.core.repository.flightsInfo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

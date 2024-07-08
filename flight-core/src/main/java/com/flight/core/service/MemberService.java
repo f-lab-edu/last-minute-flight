@@ -10,7 +10,7 @@ import com.flight.core.dto.SignupDomainRequest;
 import com.flight.core.dto.SignupDomainResponse;
 import com.flight.core.entity.Member;
 import com.flight.core.mapper.MemberDomainMapper;
-import com.flight.core.repository.MemberRepository;
+import com.flight.core.repository.member.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
 

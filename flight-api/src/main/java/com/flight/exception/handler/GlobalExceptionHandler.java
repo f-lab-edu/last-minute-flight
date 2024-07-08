@@ -5,8 +5,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.flight.common.exception.BadRequestException;
 import com.flight.common.exception.ErrorCode;
+import com.flight.common.exception.UncheckedException;
 import com.flight.dto.ApiResponse;
 
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(BadRequestException.class)
-	public ResponseEntity<ApiResponse<Void>> badRequestException(BadRequestException e) {
+	@ExceptionHandler(UncheckedException.class)
+	public ResponseEntity<ApiResponse<Void>> uncheckedException(UncheckedException e) {
 
 		ErrorCode errorCode = e.getErrorCode();
 		ApiResponse<Void> response = ApiResponse.ofFail(errorCode.getCode(), e.getClientMessage());

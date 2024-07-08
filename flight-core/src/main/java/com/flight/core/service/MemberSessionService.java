@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.flight.common.dto.MemberSessionInfo;
 import com.flight.core.entity.MemberSession;
 import com.flight.core.mapper.MemberSessionDomainMapper;
-import com.flight.core.repository.MemberSessionCache;
+import com.flight.core.repository.member.MemberSessionCache;
 
 import lombok.RequiredArgsConstructor;
 

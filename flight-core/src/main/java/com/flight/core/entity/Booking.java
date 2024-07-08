@@ -8,12 +8,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,9 +25,9 @@ public class Booking extends BaseEntity {
 	@Comment("예매 id")
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "member_id", nullable = false)
-	private Member member;
+	@Column(nullable = false, updatable = false)
+	@Comment("회원 id")
+	private Long memberId;
 
 	@Column(nullable = false)
 	@Comment("인원수")
@@ -49,8 +46,9 @@ public class Booking extends BaseEntity {
 	@Comment("삭제 여부")
 	private boolean deleted;
 
-	public Booking(Member member, int headCount) {
-		this.member = member;
+	public Booking(Long memberId, int headCount) {
+
+		this.memberId = memberId;
 		this.headCount = headCount;
 		this.status = BookingStatus.WAIT;
 		this.deleted = false;

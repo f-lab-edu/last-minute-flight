@@ -1,5 +1,8 @@
 package com.flight.core.config;
 
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +27,7 @@ public class RedisConfig {
 	}
 
 	@Bean
-	public RedisConnectionFactory redisConnectionFactory(){
+	public RedisConnectionFactory redisConnectionFactory() {
 
 		RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration(redisHost, redisPort);
 
@@ -32,12 +35,21 @@ public class RedisConfig {
 	}
 
 	@Bean
-	public RedisTemplate<String, Object> redisTemplate(){
+	public RedisTemplate<String, Object> redisTemplate() {
 		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(redisConnectionFactory());
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 		redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
 
 		return redisTemplate;
+	}
+
+	@Bean
+	public RedissonClient redissonClient() {
+		Config config = new Config();
+		config.useSingleServer()
+			.setAddress("redis://" + redisHost + ":" + redisPort);
+
+		return Redisson.create(config);
 	}
 }

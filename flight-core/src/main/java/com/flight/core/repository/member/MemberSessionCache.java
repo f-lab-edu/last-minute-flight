@@ -1,4 +1,4 @@
-package com.flight.core.repository;
+package com.flight.core.repository.member;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
