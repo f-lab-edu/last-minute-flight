@@ -5,7 +5,7 @@ import java.io.Serial;
 import lombok.Getter;
 
 @Getter
-public class DuplicatedFieldException extends BadRequestException {
+public class DuplicatedFieldException extends UncheckedException {
 
 	@Serial
 	private static final long serialVersionUID = 2589213167199844919L;

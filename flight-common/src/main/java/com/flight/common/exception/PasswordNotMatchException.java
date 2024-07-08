@@ -5,7 +5,7 @@ import java.io.Serial;
 import lombok.Getter;
 
 @Getter
-public class PasswordNotMatchException extends BadRequestException {
+public class PasswordNotMatchException extends UncheckedException {
 
 	@Serial
 	private static final long serialVersionUID = -561719815198531430L;

@@ -5,7 +5,7 @@ import java.io.Serial;
 import lombok.Getter;
 
 @Getter
-public class UnAuthenticatedException extends BadRequestException {
+public class UnAuthenticatedException extends UncheckedException {
 
 	@Serial
 	private static final long serialVersionUID = -491886582039001644L;
